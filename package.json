@@ -13,8 +13,12 @@
     "koa-bodyparser": "^4.2.0",
     "koa-logger": "^2.0.1",
     "koa-router": "^7.1.1",
+    "md5": "^2.2.1",
+    "moment": "^2.18.1",
     "node-fetch": "^1.6.3",
     "node-schedule": "^1.2.1",
-    "sha1": "^1.1.1"
+    "randomstring": "^1.1.5",
+    "sha1": "^1.1.1",
+    "uuid": "^3.0.1"
   }
 }
