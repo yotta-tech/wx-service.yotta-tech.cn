@@ -9,4 +9,19 @@ exports.getAccessToken = function (appId, appSecret) {
     }
   })
   .then(response => response.json())
+  .then(response => {
+    if (response.access_token) {
+      console.log('getAccessToken success', response)
+      return {
+        accessToken: response.access_token,
+        expiresIn: response.expires_in
+      }
+    } else {
+      console.warn('getAccessToken error', response)
+      return {
+        accessToken: '',
+        expiresIn: 0
+      }
+    }
+  })
 }

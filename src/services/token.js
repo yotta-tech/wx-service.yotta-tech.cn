@@ -4,8 +4,8 @@ const cache = {}
 
 exports.cacheAccessToken = async function () {
   let response = await tokenAPI.getAccessToken(config.APP_ID, config.APP_SECRET)
-  cache.accessToken = response.access_token
-  cache.expiresIn = response.expires_in
+  cache.accessToken = response.accessToken
+  cache.expiresIn = response.expiresIn
 }
 
 exports.getAccessToken = async function (update) {
@@ -14,3 +14,7 @@ exports.getAccessToken = async function (update) {
   }
   return cache.accessToken
 }
+
+// update access token very 1.5h
+exports.cacheAccessToken()
+setTimeout(exports.cacheAccessToken, 60000 * 90)
