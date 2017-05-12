@@ -1,11 +1,10 @@
-const tokenAPI = require('../api/token')
-const config = require('../config')
+const getAccessToken = require('wx-service').base.getAccessToken
 const cache = {}
 
 exports.cacheAccessToken = async function () {
-  let response = await tokenAPI.getAccessToken(config.APP_ID, config.APP_SECRET)
-  cache.accessToken = response.accessToken
-  cache.expiresIn = response.expiresIn
+  let response = await getAccessToken()
+  cache.accessToken = response.access_token
+  cache.expiresIn = response.expires_in
 }
 
 exports.getAccessToken = async function (update) {

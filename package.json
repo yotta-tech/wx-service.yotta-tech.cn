@@ -1,5 +1,5 @@
 {
-  "name": "wx-service",
+  "name": "wx-service.yotta-tech.cn",
   "version": "0.0.1",
   "description": "wx service",
   "main": "index.js",
@@ -14,11 +14,9 @@
     "koa-logger": "^2.0.1",
     "koa-router": "^7.1.1",
     "md5": "^2.2.1",
-    "moment": "^2.18.1",
     "node-fetch": "^1.6.3",
     "node-schedule": "^1.2.1",
-    "randomstring": "^1.1.5",
-    "sha1": "^1.1.1",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "wx-service": "0.0.6"
   }
 }

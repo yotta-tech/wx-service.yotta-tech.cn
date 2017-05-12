@@ -1,16 +1,11 @@
-const sha1 = require('sha1')
 const router = require('koa-router')()
-const TOKEN = require('../config').TOKEN
-
-function sign (nonce, timestamp, token) {
-  return sha1([nonce, timestamp, token].sort().join(''))
-}
+const sign = require('wx-service').base.sign
 
 router.get('/', async (ctx, next) => {
   let request = ctx.request
   let signature = request.query.signature
   let echostr = request.query.echostr
-  let sha1Result = sign(request.query.nonce, request.query.timestamp, TOKEN)
+  let sha1Result = sign(request.query.nonce, request.query.timestamp)
 
   if (sha1Result === signature) {
     console.log('signature verified successfully')
