@@ -1,3 +1,5 @@
 module.exports = {
-  TOKEN: 'YOTTATECHWX'
+  TOKEN: 'YOTTATECHWX',
+  APP_ID: '',
+  APP_SECRET: ''
 }
