@@ -8,4 +8,5 @@ exports.getAccessToken = function (appId, appSecret) {
       'Content-Type': 'application/json'
     }
   })
+  .then(response => response.json())
 }
