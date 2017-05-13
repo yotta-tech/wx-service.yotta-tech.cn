@@ -1,5 +1,6 @@
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
+const serve = require('koa-static')
 const koaLogger = require('koa-logger')
 const router = require('./src/routes')
 const config = require('./src/config')
@@ -18,6 +19,9 @@ app.use(koaLogger())
 
 // body parser
 app.use(bodyParser())
+
+// static files
+app.use(serve('./src/public'))
 
 // routes
 app.use(router.routes())
