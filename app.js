@@ -7,7 +7,7 @@ const config = require('./src/config')
 const WXService = require('wx-service')
 
 const app = new Koa()
-const HTTP_PORT = process.env.HTTP_PORT || 3000
+const HTTP_PORT = process.env.HTTP_PORT || 9002
 
 // init wx-service
 WXService.CONFIG.appId = config.APP_ID
