@@ -10,9 +10,9 @@ const app = new Koa()
 const HTTP_PORT = process.env.HTTP_PORT || 9002
 
 // init wx-service
-WXService.CONFIG.appId = config.APP_ID
-WXService.CONFIG.appSecret = config.APP_SECRET
-WXService.CONFIG.token = config.TOKEN
+WXService.config.appId = config.APP_ID
+WXService.config.appSecret = config.APP_SECRET
+WXService.config.token = config.TOKEN
 
 // koa logger
 app.use(koaLogger())

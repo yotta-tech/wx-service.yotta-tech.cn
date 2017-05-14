@@ -8,8 +8,32 @@
   <body>
     <div>DEMO PAGE</div>
     <div id="url"></div>
+    <script src="https://cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script>
       document.getElementById('url').innerText = window.location.href
+
+      $.ajax({
+        url: '/jsapi/config',
+        data: {
+          url: window.location.href
+        },
+        success: function (r) {
+          console.log(r)
+          wx.config({
+            debug: true,
+            appId: r.appId,
+            timestamp: r.timestamp,
+            nonceStr: r.nonceStr,
+            signature: r.signature,
+            jsApiList: ['onMenuShareTimeline']
+          })
+        }
+      })
+
+      wx.ready(function () {
+        alert('ready')
+      })
     </script>
   </body>
 </html>
