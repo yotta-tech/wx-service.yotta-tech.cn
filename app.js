@@ -13,6 +13,8 @@ const HTTP_PORT = process.env.HTTP_PORT || 9002
 WXService.config.appId = config.APP_ID
 WXService.config.appSecret = config.APP_SECRET
 WXService.config.token = config.TOKEN
+WXService.config.payKey = config.PAY_KEY
+WXService.config.merchantId = config.MERCHANT_ID
 
 // koa logger
 app.use(koaLogger())

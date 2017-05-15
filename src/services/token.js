@@ -20,7 +20,10 @@ exports.getAccessToken = async function (update) {
 exports.getAuthorizeAccessToken = async function (code) {
   let response = await oauth.getAccessToken(code)
   console.log('authorized access token', response)
-  return response.access_token
+  return {
+    accessToken: response.access_token,
+    openid: response.openid
+  }
 }
 
 // update access token very 1.5h

@@ -13,27 +13,61 @@
     <script>
       document.getElementById('url').innerText = window.location.href
 
+      var openid = ''
+
       $.ajax({
         url: '/jsapi/config',
         data: {
           url: window.location.href
         },
         success: function (r) {
-          console.log(r)
-          wx.config({
-            debug: true,
-            appId: r.appId,
-            timestamp: r.timestamp,
-            nonceStr: r.nonceStr,
-            signature: r.signature,
-            jsApiList: ['onMenuShareTimeline']
-          })
+          initWX(r.appId, r.timestamp, r.nonceStr, r.signature)
         }
       })
 
       wx.ready(function () {
         alert('ready')
       })
+
+      function initWX (appId, timestamp, nonceStr, signature) {
+        wx.config({
+          debug: true,
+          appId: appId,
+          timestamp: timestamp,
+          nonceStr: nonceStr,
+          signature: signature,
+          jsApiList: ['onMenuShareTimeline', 'chooseWXPay']
+        })
+      }
+
+      function getQuery (key) {
+        return window.location.search.substring(1).split('&')
+        .map(function (item) {
+          return {
+            key: item.split('=')[0],
+            value: item.split('=')[1]
+          }
+        })
+        .filter(function (item) {
+          return item.key === key
+        })[0].value
+      }
+
+      function getOpenid () {
+        $.ajax({
+          url: '/token/accesstoken',
+          data: {
+            code: getQuery('code')
+          },
+          dataType: 'json',
+          success: function (response) {
+            console.log('getopenid response', response)
+          },
+          error: function (err) {
+            alert('getOpenid error: ', JSON.stringify(err))
+          }
+        })
+      }
     </script>
   </body>
 </html>
