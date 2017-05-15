@@ -16,9 +16,5 @@ exports.createOrder = async function (request) {
   })
 
   console.log('createOrder response', response)
-  return {
-    signature: response.sign,
-    prepayId: response.prepay_id,
-    nonceStr: response.nonce_str
-  }
+  return wx.pay.paySign(response.prepay_id, 'MD5')
 }
