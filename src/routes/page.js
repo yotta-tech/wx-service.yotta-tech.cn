@@ -4,7 +4,7 @@ const getAuthorizeURL = require('wx-service').oauth.getAuthorizeURL
 // let ip = ctx.headers['x-real-ip']
 
 router.get('/demo', async (ctx, next) => {
-  let url = getAuthorizeURL('http://wx-service.jackyang.me/demo.html', ctx.request.query.silent === 'true' ? 'snsapi_base' : 'snsapi_userinfo')
+  let url = getAuthorizeURL('http://wx-service.jackyang.me/pay/demo.html', ctx.request.query.silent === 'true' ? 'snsapi_base' : 'snsapi_userinfo')
   ctx.redirect(url)
 })
 
