@@ -90,7 +90,7 @@
           dataType: 'json',
           success: function (response) {
             wx.chooseWXPay({
-              timestamp: 0,
+              timestamp: response.timeStamp,
               nonceStr: response.nonceStr,
               package: response.package,
               signType: response.signType,
