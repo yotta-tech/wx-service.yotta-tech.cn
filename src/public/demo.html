@@ -20,6 +20,7 @@
         data: {
           url: window.location.href
         },
+        dataType: 'json',
         success: function (r) {
           initWX(r.appId, r.timestamp, r.nonceStr, r.signature)
         }
