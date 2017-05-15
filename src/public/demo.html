@@ -8,6 +8,9 @@
   <body>
     <div>DEMO PAGE</div>
     <div id="url"></div>
+    <div>
+      <button onclick="handlePay()">PAY</button>
+    </div>
     <script src="https://cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script>
@@ -15,22 +18,27 @@
 
       var openid = ''
 
-      $.ajax({
-        url: '/jsapi/config',
-        data: {
-          url: window.location.href
-        },
-        dataType: 'json',
-        success: function (r) {
-          initWX(r.appId, r.timestamp, r.nonceStr, r.signature)
-        }
-      })
+      initWX()
+      getOpenid()
 
       wx.ready(function () {
         alert('ready')
       })
 
-      function initWX (appId, timestamp, nonceStr, signature) {
+      function initWX () {
+        $.ajax({
+          url: '/jsapi/config',
+          data: {
+            url: window.location.href
+          },
+          dataType: 'json',
+          success: function (r) {
+            configWX(r.appId, r.timestamp, r.nonceStr, r.signature)
+          }
+        })
+      }
+
+      function configWX (appId, timestamp, nonceStr, signature) {
         wx.config({
           debug: true,
           appId: appId,
@@ -63,11 +71,40 @@
           dataType: 'json',
           success: function (response) {
             console.log('getopenid response', response)
+            openid = response.openid
           },
           error: function (err) {
             alert('getOpenid error: ', JSON.stringify(err))
           }
         })
+      }
+
+      function handlePay () {
+        $.ajax({
+          url: '/pay/order',
+          method: 'post',
+          data: {
+            openid: openid,
+            totalFee: 1
+          },
+          dataType: 'json',
+          success: function (response) {
+
+          },
+          error: function (err) {
+
+          }
+        })
+        /*wx.chooseWXPay({
+          timestamp: 0, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+          nonceStr: '', // 支付签名随机串，不长于 32 位
+          package: '', // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+          signType: '', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+          paySign: '', // 支付签名
+          success: function (res) {
+              // 支付成功后的回调函数
+          }
+        })*/
       }
     </script>
   </body>
