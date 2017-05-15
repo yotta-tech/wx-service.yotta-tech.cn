@@ -8,7 +8,12 @@ exports.getConfig = async function (url) {
   let signResult = jsapi.sign(ticket, url)
 
   console.log('jsticket, url', ticket, url)
-  signResult.appId = wxService.config.appId
   console.log('jspi.getConfig', signResult)
-  return signResult
+
+  return {
+    appId: wxService.config.appId,
+    timestamp: signResult.timestamp,
+    signature: signResult.signature,
+    nonceStr: signResult.noncestr
+  }
 }
