@@ -92,7 +92,7 @@
             wx.chooseWXPay({
               timestamp: 0,
               nonceStr: response.nonceStr,
-              package: response.prepayId,
+              package: 'prepay_id=' + response.prepayId,
               signType: 'MD5',
               paySign: response.signature,
               success: function (res) {
