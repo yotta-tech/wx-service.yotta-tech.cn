@@ -82,14 +82,24 @@
       function handlePay () {
         $.ajax({
           url: '/pay/order',
-          method: 'post',
+          type: 'post',
           data: {
             openid: openid,
             totalFee: 1
           },
           dataType: 'json',
           success: function (response) {
-
+            wx.chooseWXPay({
+              timestamp: 0,
+              nonceStr: response.nonceStr,
+              package: response.prepayId,
+              signType: 'MD5',
+              paySign: response.signature,
+              success: function (res) {
+                  // 支付成功后的回调函数
+                  alert('PAY SUCCESS')
+              }
+            })
           },
           error: function (err) {
 

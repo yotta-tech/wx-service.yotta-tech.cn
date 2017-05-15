@@ -12,7 +12,15 @@ router.post('/order', async (ctx, next) => {
     openid: ctx.request.body.openid,
     ip: ctx.headers['x-real-ip']
   })
-  ctx.body = 'return'
+  ctx.body = response
+})
+
+router.get('/callback', async (ctx, next) => {
+  ctx.body = ''
+})
+
+router.post('/callback', async (ctx, next) => {
+  ctx.body = ''
 })
 
 module.exports = router

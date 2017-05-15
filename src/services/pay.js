@@ -11,9 +11,14 @@ exports.createOrder = async function (request) {
     out_trade_no: orderId,
     total_fee: request.totalFee,
     ip: request.ip,
-    notify_url: '',
+    notify_url: 'http://wx-service.jackyang.me/pay/callback',
     openid: request.openid
   })
 
   console.log('createOrder response', response)
+  return {
+    signature: response.sign,
+    prepayId: response.prepay_id,
+    nonceStr: response.nonce_str
+  }
 }
