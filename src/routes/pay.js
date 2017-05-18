@@ -15,10 +15,7 @@ router.post('/order', async (ctx, next) => {
   ctx.body = response
 })
 
-router.get('/callback', async (ctx, next) => {
-  ctx.body = ''
-})
-
+// pay notify_url
 router.post('/callback', async (ctx, next) => {
   ctx.body = ''
 })

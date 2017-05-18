@@ -3,6 +3,7 @@ const bodyParser = require('koa-bodyparser')
 const serve = require('koa-static')
 const koaLogger = require('koa-logger')
 const router = require('./src/routes')
+const cors = require('kcors')
 const config = require('./src/config')
 const WXService = require('wx-service')
 
@@ -18,6 +19,9 @@ WXService.config.merchantId = config.MERCHANT_ID
 
 // koa logger
 app.use(koaLogger())
+
+// cros
+app.use(cors())
 
 // body parser
 app.use(bodyParser())
