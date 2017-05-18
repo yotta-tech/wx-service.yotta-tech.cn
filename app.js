@@ -21,7 +21,15 @@ WXService.config.merchantId = config.MERCHANT_ID
 app.use(koaLogger())
 
 // cros
-app.use(cors())
+const ALLOW_CROSS_ORIGIN_DOMAINS = ['jackyang.me', 'yotta-tech.cn']
+app.use(cors({
+  origin (ctx) {
+    let o = ctx.request.headers.origin
+    if (ALLOW_CROSS_ORIGIN_DOMAINS.filter(domain => o.endsWith(domain)).length > 0) {
+      return o
+    }
+  }
+}))
 
 // body parser
 app.use(bodyParser())
