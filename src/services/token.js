@@ -1,31 +1,25 @@
 const getAccessToken = require('wx-service').base.getAccessToken
 const wx = require('wx-service')
-const oauth = wx.oauth
 const cache = wx.cache
+let accessTokenJobStarted = false
 
 exports.cacheAccessToken = async function () {
   let response = await getAccessToken()
-  console.log(response)
   cache.accessToken = response.access_token
   cache.expiresIn = response.expires_in
+  cache.expiresAt = Date.now() + response.expires_in
+  console.log('accesstoken cache refreshed', cache)
 }
 
 exports.getAccessToken = async function (update) {
-  if (update || !cache.accessToken) {
+  if (update || !cache.accessToken || cache.expiresAt < Date.now()) {
     await exports.cacheAccessToken()
   }
+
+  if (!accessTokenJobStarted) {
+    setInterval(exports.cacheAccessToken, cache.expiresIn * .9 * 1000)
+    accessTokenJobStarted = true
+  }
+
   return cache.accessToken
 }
-
-exports.getAuthorizeAccessToken = async function (code) {
-  let response = await oauth.getAccessToken(code)
-  console.log('authorized access token', response)
-  return {
-    accessToken: response.access_token,
-    openid: response.openid
-  }
-}
-
-// update access token very 1.5h
-setTimeout(exports.cacheAccessToken, 0)
-setInterval(exports.cacheAccessToken, 60000 * 90)

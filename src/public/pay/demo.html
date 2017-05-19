@@ -64,7 +64,7 @@
 
       function getOpenid () {
         $.ajax({
-          url: '/token/accesstoken',
+          url: '/oauth/accesstoken',
           data: {
             code: getQuery('code')
           },

@@ -8,10 +8,4 @@ router.get('/', async (ctx, next) => {
   ctx.body = accessToken
 })
 
-router.get('/accesstoken', async (ctx, next) => {
-  let code = ctx.request.query.code
-  let accessToken = await tokenService.getAuthorizeAccessToken(code)
-  ctx.body = accessToken
-})
-
 module.exports = router
